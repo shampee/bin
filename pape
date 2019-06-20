@@ -12,8 +12,9 @@ file="$dir/$(date)-unsplash-1920x1080.png"
 
 wget https://source.unsplash.com/random/1920x1080 -O "$file" -- > /dev/null 2>&1
 
-feh --bg-fill --no-fehbg "$file" &
+feh --bg-fill "$file" &
 
+wal --backend colorz -i "$file"
 dash ${HOME}/bin/rice "$file" || exit 1
 
 [ "$(pgrep bar)" ] &&
@@ -22,4 +23,4 @@ dash ${HOME}/bin/rice "$file" || exit 1
 [ "$(pgrep -x compton)" ] && 
     { pkill -9 compton ; nohup compton -- > /dev/null 2>&1 & } &
 
-xrdb load ${HOME}/etc/Xresources
+#xrdb load ${HOME}/etc/Xresources

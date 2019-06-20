@@ -6,5 +6,5 @@
 #
 
 /bin/mkdir -p /tmp/bin
-/bin/cp -rf /home/mitch/usr/local/bin/* /tmp/bin/
+/bin/cp -rf /home/hmps/usr/local/bin/* /tmp/bin/
 /bin/cp -f /bin/* /tmp/bin/

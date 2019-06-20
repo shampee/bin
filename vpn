@@ -23,9 +23,8 @@ cd /etc/openvpn || exit 1
     modprobe tun 2> /dev/null
 
 case "$1" in
-    off|*-off) pkill -9 openvpn ; rm /tmp/vpn ; exit ;;
     swi*|-ch) loc=Switzerland  ;;
-    can*|-ca|ca) loc=CA\ Montreal ;;
+    can*|-ca) loc=CA\ Montreal ;;
     *toronto*|-can-tor*) loc=CA\ Toronto ;;
     sin*|-sg) loc=Singapore    ;;
     nor*|-no) loc=Norway       ;;
@@ -34,7 +33,7 @@ case "$1" in
     rom*|-ro) loc=Romania      ;;
     *east*|*us-east*) loc=US\ East  ;; 
     *west*|*seattle*|*us-seattle*) loc=US\ Seattle  ;; 
-    *midwest*|*us-mid*|us|mid) loc=US\ Midwest  ;; 
+    *midwest*|*us-mid*|us) loc=US\ Midwest  ;; 
     *) loc="$(ls *.ovpn | { sort -R || shuf ; } 2> /dev/null | head -n 1)"
        loc="${loc%.*}"
 esac
