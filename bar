@@ -175,9 +175,9 @@ while \
         "$(wksp)$(< /tmp/bar/wksp)%{-u} " \
         "  %{T4}$(layout)" \
         "  %{c}%{F$color2}%{T3}$(< /tmp/bar/song)%{F-}%{r}%{T2}%{T4} " \
-        "  $(get_bat)  " \
-        "  %{T4}$(vol)  " \
-        " %{F$color2}%{T4} $(< /tmp/bar/date) %{T4}%{T-}%{F-}"
+        "  %{F$color2}%{T4}$(get_bat)  " \
+        "  %{F$color2}%{T4}$(vol)  " \
+        "%{F$color2}%{T4} $(< /tmp/bar/date) %{T4}%{T-}%{F-}"
     do sleep 0.5
 done 2> /dev/null | \
 
