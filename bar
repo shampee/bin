@@ -75,8 +75,8 @@ init() {
 	ft4="Font Awesome 5 Brands:size=12"
     else
         ft2="Font Awesome 5 Pro:size=10"
-        ft3="IBM Plex Sans:size=10"
-        ft4="Font Awesome 5 Brands:size=10"
+        ft3="Font Awesome 5 Brands:size=10"
+        ft4="IBM Plex Sans:size=10"
         ft5="Symbola:size=10"
     fi
 }
@@ -150,7 +150,7 @@ wksp() {
 			  ws=" %{F$color2}\\uf268%{F-} "
 			  ;;
 			6)
-			  ws=" %{F$color2}\\uf21b%{F-} "
+			  ws=" %{F$color2}\\uf6fa%{F-} "
 			  ;;
 			7)
 			  ws=" %{F$color2}\\uf0e0%{F-} "
@@ -252,6 +252,8 @@ lemonbar -db \
          -f "$ft1" \
 	 -o -2 \
          -f "$ft2" \
+	 -o -2 \
+	 -f "$ft3" \
          -g ${w}x${h}+${x}+${y} \
          -n bar \
          -u 2 \
