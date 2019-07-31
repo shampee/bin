@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/mksh
 #
 # http://github.com/mitchweaver/bin
 #
@@ -40,10 +40,11 @@ init() {
 
     #w=$(( $sw - $gap * 2 ))
     w=$($sw*2)
+    #w=900
     #x=$gap
     x=0
     h=$(< /tmp/dwm_info/bar_height)
-    
+
     # if gaps, gap the bar
     [ $gap -gt 0 ] && h=$(( $h + ($h / 4) ))
 
@@ -70,6 +71,8 @@ init() {
     ft1="San Francisco Text:size=12"
     if [ $gap -eq 0 ] ; then
         ft2="Symbola:size=10"
+	ft3="Font Awesome 5 Pro:size=12"
+	ft4="Font Awesome 5 Brands:size=12"
     else
         ft2="Font Awesome 5 Pro:size=10"
         ft3="IBM Plex Sans:size=10"
@@ -89,16 +92,79 @@ layout() {
         6) echo -n "\\uf302" ;; # fibonacci
         7) echo -n "\\uf037" ;; # top master
     esac 2> /dev/null
-} 
+}
 
 wksp() {
     if [ $(< /tmp/dwm_info/check) -eq 1 ] ; then
         for i in $(seq $num_ws || jot $num_ws) ; do
 
             if [ $(< /tmp/dwm_info/ws"$i") -eq 1 ] ; then
-                ws=" %{F$color2}$i%{F-} "
+                case "$i" in
+			1)
+			  ws=" %{F$color7}\\uf120%{F-} "
+			  ;;
+			2)
+			  ws=" %{F$color7}\\uf719%{F-} "
+			  ;;
+			3)
+			  ws=" %{F$color7}\\uf121%{F-} "
+			  ;;
+			4)
+			  ws=" %{F$color7}\\uf647%{F-} "
+			  ;;
+			5)
+			  ws=" %{F$color7}\\uf268%{F-} "
+			  ;;
+			6)
+			  ws=" %{F$color7}\\uf21b%{F-} "
+			  ;;
+			7)
+			  ws=" %{F$color7}\\uf0e0%{F-} "
+			  ;;
+			8)
+			  ws=" %{F$color7}\\uf4b6%{F-} "
+			  ;;
+			9)
+			  ws=" %{F$color7}\\uf019%{F-} "
+			  ;;
+			10)
+			  ws=" %{F$color7}\\uf611%{F-} "
+			  ;;
+		esac
+
             else
-                ws=" $i "
+                case "$i" in
+			1)
+			  ws=" %{F$color2}\\uf120%{F-} "
+			  ;;
+			2)
+			  ws=" %{F$color2}\\uf719%{F-} "
+			  ;;
+			3)
+			  ws=" %{F$color2}\\uf121%{F-} "
+			  ;;
+			4)
+			  ws=" %{F$color2}\\uf647%{F-} "
+			  ;;
+			5)
+			  ws=" %{F$color2}\\uf268%{F-} "
+			  ;;
+			6)
+			  ws=" %{F$color2}\\uf21b%{F-} "
+			  ;;
+			7)
+			  ws=" %{F$color2}\\uf0e0%{F-} "
+			  ;;
+			8)
+			  ws=" %{F$color2}\\uf4b6%{F-} "
+			  ;;
+			9)
+			  ws=" %{F$color2}\\uf019%{F-} "
+			  ;;
+			10)
+			  ws=" %{F$color2}\\uf611%{F-} "
+			  ;;
+		esac
             fi
 
             if [ $(< /tmp/dwm_info/current_ws) -eq $i ] ; then
@@ -115,7 +181,7 @@ wksp() {
     fi 2> /dev/null
 }
 
-vol() { 
+vol() {
     vol="$(< /tmp/bar/vol)"
     case ${vol%??} in
         10|[5-9]) echo -n "\\uf028 $vol" ;;
@@ -126,7 +192,7 @@ vol() {
 
 launch_daemons() {
     # battery_daemon
-    dash -c '[ $(dash ~/bin/bperc) = NONE ] && exit ; 
+    dash -c '[ $(dash ~/bin/bperc) = NONE ] && exit ;
     while true ; do
         perc=$(bperc)
         if $(case $(uname) in
@@ -134,7 +200,7 @@ launch_daemons() {
                 OpenBSD) test $(apm -a) -eq 1
             esac)
         then
-            bat="\\uf492" 
+            bat="\\uf492"
         else
             case ${perc%?} in
                 [8-9]) bat="\\uf240" ;;
@@ -150,7 +216,7 @@ launch_daemons() {
     done' > /dev/null 2>&1 &
 
     # time_daemon
-    dash -c 'while date "+%I:%M %p" > /tmp/bar/date
+    dash -c 'while date "+%H:%M" > /tmp/bar/date
         do sleep 59
     done' &
 }
@@ -174,10 +240,10 @@ while \
     printf " %s%b%b%b%b%b%b%b%b%b%s \\n" \
         "$(wksp)$(< /tmp/bar/wksp)%{-u} " \
         "  %{T4}$(layout)" \
-        "  %{c}%{F$color2}%{T3}$(< /tmp/bar/song)%{F-}%{r}%{T2}%{T4} " \
-        "  %{F$color2}%{T4}$(get_bat)  " \
-        "  %{F$color2}%{T4}$(vol)  " \
-        "%{F$color2}%{T4} $(< /tmp/bar/date) %{T4}%{T-}%{F-}"
+        "  %{c}%{F$color7}%{T3}$(< /tmp/bar/song)%{F-}%{r}%{T2}%{T4} " \
+        "  %{F$color7}$(get_bat)  " \
+        "  %{F$color7}$(vol)  " \
+        "%{F$color7} $(< /tmp/bar/date) %{T4}%{T-}%{F-}"
     do sleep 0.5
 done 2> /dev/null | \
 
