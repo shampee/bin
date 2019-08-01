@@ -1,14 +1,15 @@
 #!/bin/dash
+#
+# still a work in progress
 
 dir=/tmp/pape
-file="$dir/$(ls -thAl /tmp/pape | head -n 2 | tail -1 | awk '{print $9 " " $10 " " $11 " " $12 " " $13 " " $14 " " $15}')"
+file="$(ls -t ~/var/tmp/wall | head -n 1)"
 
-pape="~/papes/$(date)-unsplash-1920x1080.png"
+#pape="`date +%Y-%m-%H-%M-%S)`.png"
+cp "$dir/$file" ~/papes/
 
-cp $file $pape
-
-wal --backend colorz -i $pape
-rice $pape
+wal --backend colorz -i "~/papes/$file"
+rice "~/papes/$file"
 
 [ "$(pgrep bar)" ] &&
     { pkill -9 bar ; nohup bar -- > /dev/null 2>&1 & } &

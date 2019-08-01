@@ -42,7 +42,7 @@ pkill -9 xwinwrap
 case "$(basename $(file -b -i -L ${wall_path}))" in
     *png*|*jpg*|*jpeg*) feh --bg-fill --no-fehbg ${wall_path} & ;;
     *gif*|*webm*|*mp4*|*mkv*) mpvbg ${wall_path} &
-esac 
+esac
 
 [ -n "$LIGHT" ] && wal -qnli "$wall_path" || wal -qni "$wall_path"
 

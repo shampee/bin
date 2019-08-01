@@ -70,14 +70,13 @@ init() {
     # fonts
     ft1="San Francisco Text:size=12"
     if [ $gap -eq 0 ] ; then
-        ft2="Symbola:size=10"
-	ft3="Font Awesome 5 Pro:size=12"
-	ft4="Font Awesome 5 Brands:size=12"
+	ft2="Font Awesome 5 Pro:size=12"
+	ft3="Font Awesome 5 Brands:size=12"
+        ft4="Symbola:size=10"
     else
         ft2="Font Awesome 5 Pro:size=10"
         ft3="Font Awesome 5 Brands:size=10"
-        ft4="IBM Plex Sans:size=10"
-        ft5="Symbola:size=10"
+        ft4="Symbola:size=10"
     fi
 }
 
