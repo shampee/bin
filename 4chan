@@ -1,0 +1,8 @@
+#!/bin/dash
+#
+# make a 4chan compatible webm
+
+ffmpeg -i "$1" -y -c:v \
+libvpx -crf 9 -b:v 0 -c:a \
+libopus -vbr on -b:a 64k \
+"$1.webm"

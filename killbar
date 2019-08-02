@@ -1,0 +1,3 @@
+pkill bar
+killall dash
+killall sleep
