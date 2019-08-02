@@ -103,7 +103,7 @@ wksp() {
 			  ws=" %{F$color7}\\uf120%{F-} "
 			  ;;
 			2)
-			  ws=" %{F$color7}\\uf719%{F-} "
+			  ws=" %{F$color7}\\uf37e%{F-} "
 			  ;;
 			3)
 			  ws=" %{F$color7}\\uf121%{F-} "
@@ -137,7 +137,7 @@ wksp() {
 			  ws=" %{F$color2}\\uf120%{F-} "
 			  ;;
 			2)
-			  ws=" %{F$color2}\\uf719%{F-} "
+			  ws=" %{F$color2}\\uf37e%{F-} "
 			  ;;
 			3)
 			  ws=" %{F$color2}\\uf121%{F-} "
