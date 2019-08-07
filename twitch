@@ -15,6 +15,7 @@ vihart
 Sweet_Anita
 DreamHackCS
 DrDisrespect
+BruceGreene
 "
 # ------------------------------------- #
 
@@ -24,7 +25,7 @@ for i in $streams ; do
     {
         # test if stream is up
         youtube-dl -s http://twitch.tv/$i > /dev/null
-        
+
         # if so, add to our list
         [ $? -eq 0 ] && touch /tmp/twitch/$i
     } &
