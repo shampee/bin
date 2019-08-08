@@ -1,0 +1,3 @@
+#!/bin/bash
+
+uxterm -e "cat /home/hmps/.cache/wal/sequences; bash -l -i -c 'ranger'"
