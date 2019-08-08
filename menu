@@ -1,7 +1,7 @@
 #!/bin/dash
 #
 # http://github.com/mitchweaver/bin
-# 
+#
 # dmenu launcher, with my patches
 #
 # see: http://github.com/mitchweaver/suckless
@@ -13,9 +13,9 @@ fi
 
 if [ -f ${HOME}/.cache/wal/colors.sh ] ; then
     . ${HOME}/.cache/wal/colors.sh
-    colors="-nb $color0 -nf $color15 -sb $color2 -sf $color15" 
+    colors="-nb $color0 -nf $color15 -sb $color2 -sf $color15"
 else
-    colors="-nb #fcfaf8 -nf #423F3D -sb #998d66 -sf #423F3D" 
+    colors="-nb #fcfaf8 -nf #423F3D -sb #998d66 -sf #423F3D"
 fi
 
 res=$(xrandr --nograb --current | awk '/\*/ {print $1}' | tail -n 1)
