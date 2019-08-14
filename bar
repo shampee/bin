@@ -194,8 +194,6 @@ get_wifi() {
 
 init
 launch_daemons
-batmon &
-
 
 while \
     printf " %s%b%b%b%b%b%b%b%b%b%s \\n" \
