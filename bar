@@ -68,7 +68,7 @@ init() {
     ${HOME}/bin/vol > /tmp/bar/vol
 
     # fonts
-    ft1="Proxima Nova:size=13"
+    ft1="Proxima Nova, Proxima Rg:size=13"
     if [ $gap -eq 0 ] ; then
 		ft2="Font Awesome 5 Pro:size=12"
 		ft3="Font Awesome 5 Brands:size=12"
@@ -175,9 +175,9 @@ launch_daemons() {
     done' > /dev/null 2>&1 &
 
     # time_daemon
-    dash -c 'while date "+%H:%M" > /tmp/bar/date
-        do sleep 59
-    done' &
+    dash -c 'while date "+%H:%M"' > /tmp/bar/date; do
+		sleep 59
+    done &
 }
 
 get_bat() {
@@ -194,6 +194,8 @@ get_wifi() {
 
 init
 launch_daemons
+batmon &
+
 
 while \
     printf " %s%b%b%b%b%b%b%b%b%b%s \\n" \
@@ -207,11 +209,11 @@ while \
 done 2> /dev/null | \
 
 lemonbar -db \
-	 -o  1 \
+	 -o  2 \
 	 	-f "$ft1" \
-	 -o -4 \
+	 -o -3 \
 	 	-f "$ft2" \
-	 -o -4 \
+	 -o -3 \
 	 	-f "$ft3" \
          -g ${w}x${h}+${x}+${y} \
          -n bar \

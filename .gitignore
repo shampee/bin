@@ -8,3 +8,5 @@ local/bin/*
 src/avg/avg
 src/sum/sum
 src/timer/timer
+
+tags

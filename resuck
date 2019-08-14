@@ -1,0 +1,4 @@
+#!/bin/dash
+# Recomp suckless tools
+dir="${HOME}/etc/suckless"
+${HOME}/bin/recomp $dir/dwm $dir/st $dir/tabbed -- > /dev/null 2>&1
