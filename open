@@ -1,0 +1,27 @@
+#!/bin/sh
+
+[ $# -eq 0 ] && read inp && set "$inp"
+
+image() { feh -N -Z -s -q -. -^ feh "$@" ; }
+video() {
+    mpv --really-quiet --title=mpv \
+        --input-ipc-server=/tmp/mpvsocket "$source" "$@" &
+}
+edit() {
+    if [ -t 0 ] ; then
+        ${EDITOR:=/usr/bin/nvim} "$1"
+    else
+        st -e ${EDITOR:=/usr/bin/nvim} "$1" &
+    fi
+}
+
+if [ -f "$1" ] ; then
+    case ${1##*.} in
+        jpg|png|jpeg) image "$1" ;;
+        mp4|mkv|webm|gif) video "$1" ;;
+        mp3|flac|ogg|opus) video --no-video "$1" ;;
+        pdf|epub) zth "$1" ;;
+        gz|bz2|xz|zip) unpack "$1" ;;
+        *) edit "$1"
+    esac
+fi

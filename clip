@@ -26,7 +26,7 @@ else
             [ -f "$log" ] && rm "$log"
             while sleep 0.5 ; do
                 new=`xsel -op`
-                [ "$new" = "$tmp" ] && continue 
+                [ "$new" = "$tmp" ] && continue
                 echo "$new" >> "$log"
                 tmp="$new"
             done

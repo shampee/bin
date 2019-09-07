@@ -68,14 +68,14 @@ init() {
     ${HOME}/bin/vol > /tmp/bar/vol
 
     # fonts
-    ft1="Proxima Nova, Proxima Rg:size=13"
+    ft1="boxxy:size=9"
     if [ $gap -eq 0 ] ; then
-		ft2="Font Awesome 5 Pro:size=12"
-		ft3="Font Awesome 5 Brands:size=12"
+		ft2="Font Awesome 5 Pro:size=8"
+		ft3="Font Awesome 5 Brands:size=8"
 		ft4="Symbola:size=10"
     else
-        ft2="Font Awesome 5 Pro:size=10"
-        ft3="Font Awesome 5 Brands:size=10"
+        ft2="Font Awesome 5 Pro:size=8"
+        ft3="Font Awesome 5 Brands:size=8"
         ft4="Symbola:size=10"
     fi
 }
@@ -99,31 +99,31 @@ wksp() {
 
             if [ $(< /tmp/dwm_info/ws"$i") -eq 1 ] ; then
                 case "$i" in
-			1) ws=" %{F$color7}\\uf120%{F-} " ;;
-			2) ws=" %{F$color7}\\uf37e%{F-} " ;;
-			3) ws=" %{F$color7}\\uf121%{F-} " ;;
-			4) ws=" %{F$color7}\\uf02d%{F-} " ;;
-			5) ws=" %{F$color7}\\uf268%{F-} " ;;
-			6) ws=" %{F$color7}\\uf084%{F-} " ;;
-			7) ws=" %{F$color7}\\uf0e0%{F-} " ;;
-			8) ws=" %{F$color7}\\uf4b6%{F-} " ;;
-			9) ws=" %{F$color7}\\uf019%{F-} " ;;
-			10) ws=" %{F$color7}\\uf611%{F-} " ;;
-		esac
+					1) ws=" %{F$color7}\\uf120%{F-} " ;;
+					2) ws=" %{F$color7}\\uf37e%{F-} " ;;
+					3) ws=" %{F$color7}\\uf121%{F-} " ;;
+					4) ws=" %{F$color7}\\uf02d%{F-} " ;;
+					5) ws=" %{F$color7}\\uf268%{F-} " ;;
+					6) ws=" %{F$color7}\\uf084%{F-} " ;;
+					7) ws=" %{F$color7}\\uf0e0%{F-} " ;;
+					8) ws=" %{F$color7}\\uf4b6%{F-} " ;;
+					9) ws=" %{F$color7}\\uf019%{F-} " ;;
+					10) ws=" %{F$color7}\\uf611%{F-} " ;;
+				esac
 
             else
                 case "$i" in
-			1) ws=" %{F$color2}\\uf120%{F-} " ;;
-			2) ws=" %{F$color2}\\uf37e%{F-} " ;;
-			3) ws=" %{F$color2}\\uf121%{F-} " ;;
-			4) ws=" %{F$color2}\\uf02d%{F-} " ;;
-			5) ws=" %{F$color2}\\uf268%{F-} " ;;
-			6) ws=" %{F$color2}\\uf084%{F-} " ;;
-			7) ws=" %{F$color2}\\uf0e0%{F-} " ;;
-			8) ws=" %{F$color2}\\uf4b6%{F-} " ;;
-			9) ws=" %{F$color2}\\uf019%{F-} " ;;
-			10) ws=" %{F$color2}\\uf611%{F-} " ;;
-		esac
+					1) ws=" %{F$color2}\\uf120%{F-} " ;;
+					2) ws=" %{F$color2}\\uf37e%{F-} " ;;
+					3) ws=" %{F$color2}\\uf121%{F-} " ;;
+					4) ws=" %{F$color2}\\uf02d%{F-} " ;;
+					5) ws=" %{F$color2}\\uf268%{F-} " ;;
+					6) ws=" %{F$color2}\\uf084%{F-} " ;;
+					7) ws=" %{F$color2}\\uf0e0%{F-} " ;;
+					8) ws=" %{F$color2}\\uf4b6%{F-} " ;;
+					9) ws=" %{F$color2}\\uf019%{F-} " ;;
+					10) ws=" %{F$color2}\\uf611%{F-} " ;;
+				esac
             fi
 
             if [ $(< /tmp/dwm_info/current_ws) -eq $i ] ; then
@@ -175,9 +175,9 @@ launch_daemons() {
     done' > /dev/null 2>&1 &
 
     # time_daemon
-    dash -c 'while date "+%H:%M"' > /tmp/bar/date; do
-		sleep 59
-    done &
+    dash -c 'while date "+%H:%M" > /tmp/bar/date
+	do sleep 59
+    done' &
 }
 
 get_bat() {
@@ -199,19 +199,19 @@ while \
     printf " %s%b%b%b%b%b%b%b%b%b%s \\n" \
         "$(wksp)$(< /tmp/bar/wksp)%{-u} " \
         "  %{T4}$(layout)" \
-        "  %{c}%{F$color7}%{T3}$(< /tmp/bar/song)%{F-}%{r}%{T2}%{T4} " \
-        "  %{F$color7}$(get_bat)  " \
-        "  %{F$color7}$(vol)  " \
+        " %{c}%{F$color7}%{T3}$(< /tmp/bar/song)%{F-}%{r}%{T2}%{T4} " \
+        " %{F$color7}$(get_bat)  " \
+        " %{F$color7}$(vol)  " \
         "%{F$color7} $(< /tmp/bar/date) %{T4}%{T-}%{F-}"
     do sleep 0.5
 done 2> /dev/null | \
 
 lemonbar -db \
-	 -o  2 \
+	 -o  1 \
 	 	-f "$ft1" \
-	 -o -3 \
+	 -o -0 \
 	 	-f "$ft2" \
-	 -o -3 \
+	 -o -0 \
 	 	-f "$ft3" \
          -g ${w}x${h}+${x}+${y} \
          -n bar \

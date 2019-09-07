@@ -1,2 +1,2 @@
 #!/bin/mksh
-uxterm -title scratchpad -geometry "90x26" -e "cat /home/hmps/.cache/wal/sequences;neofetch --xoffset 40 --yoffset 40 --w3m /home/hmps/pics/smug/109\ -\ 6Nwdbgu.png && $SHELL"
+st -t "scratchpad" -g "90x26" -c "neofetch --xoffset 40 --yoffset 40 --w3m /home/hmps/pics/smug/109\ -\ 6Nwdbgu.png && $SHELL"

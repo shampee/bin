@@ -8,10 +8,10 @@
 # case $(uname) in
 #     Linux)
 #         for i in 0 1 2 ; do
-#             [ -d /sys/class/power_supply/BAT$i ] && 
+#             [ -d /sys/class/power_supply/BAT$i ] &&
 #                 { BAT=/sys/class/power_supply/BAT$i ; break ; }
 #         done
-#         [ -z "$BAT" ] && 
+#         [ -z "$BAT" ] &&
 #             { echo "NONE" ; exit 1 ; }
 
 #         perc=$(cat $BAT/capacity)
