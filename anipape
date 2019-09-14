@@ -1,1 +1,2 @@
-back4 0.33 ~/papes/animated/5.gif
+#!/bin/bash
+back4 0.05 ~/papes/animated/5.gif

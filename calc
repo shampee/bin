@@ -2,6 +2,6 @@
 mkfifo /tmp/fifo
 dialog --title 'Calculator' --inputbox "" 12 24 2>/tmp/fifo &
 input=`cat /tmp/fifo`
-output=`echo $input | bc`
+output=`echo $input | wcalc`
 dialog --title 'Calculator' --infobox "$output" 12 24
 rm /tmp/fifo
