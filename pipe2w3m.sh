@@ -1,1 +1,1 @@
-/home/hmps/scripts/pipe2w3m.sh
+cat "$@"| w3m -o auto_image=TRUE -I %{charset} -T text/html -F

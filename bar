@@ -68,7 +68,7 @@ init() {
     ${HOME}/bin/vol > /tmp/bar/vol
 
     # fonts
-    ft1="boxxy:size=9"
+    ft1="cherry:size=9"
     if [ $gap -eq 0 ] ; then
 		ft2="Font Awesome 5 Pro:size=8"
 		ft3="Font Awesome 5 Brands:size=8"
@@ -202,16 +202,16 @@ while \
         " %{c}%{F$color7}%{T3}$(< /tmp/bar/song)%{F-}%{r}%{T2}%{T4} " \
         " %{F$color7}$(get_bat)  " \
         " %{F$color7}$(vol)  " \
-        "%{F$color7} $(< /tmp/bar/date) %{T4}%{T-}%{F-}"
+        "%{F$color7} $(< /tmp/bar/date)%{T4}%{T-}%{F-}"
     do sleep 0.5
 done 2> /dev/null | \
 
 lemonbar -db \
 	 -o  1 \
 	 	-f "$ft1" \
-	 -o -0 \
+	 -o  1 \
 	 	-f "$ft2" \
-	 -o -0 \
+	 -o  1 \
 	 	-f "$ft3" \
          -g ${w}x${h}+${x}+${y} \
          -n bar \
