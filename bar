@@ -39,7 +39,7 @@ init() {
     local gap=$(< /tmp/dwm_info/gappx)
 
     #w=$(( $sw - $gap * 2 ))
-    w=$($sw*2)
+    #w=$($sw*2)
     #w=900
     #x=$gap
     x=0
@@ -68,16 +68,8 @@ init() {
     ${HOME}/bin/vol > /tmp/bar/vol
 
     # fonts
-    ft1="cherry:size=9"
-    if [ $gap -eq 0 ] ; then
-		ft2="Font Awesome 5 Pro:size=8"
-		ft3="Font Awesome 5 Brands:size=8"
-		ft4="Symbola:size=10"
-    else
-        ft2="Font Awesome 5 Pro:size=8"
-        ft3="Font Awesome 5 Brands:size=8"
-        ft4="Symbola:size=10"
-    fi
+    ft1="San Fransisco:size=11"
+	ft2="tewi:size=11"
 }
 
 layout() {
@@ -211,8 +203,6 @@ lemonbar -db \
 	 	-f "$ft1" \
 	 -o  1 \
 	 	-f "$ft2" \
-	 -o  1 \
-	 	-f "$ft3" \
          -g ${w}x${h}+${x}+${y} \
          -n bar \
          -u 2 \
@@ -220,3 +210,4 @@ lemonbar -db \
          -B $color0 \
          -F $color1 \
          -a 0 > /dev/null 2>&1
+
