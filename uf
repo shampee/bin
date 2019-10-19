@@ -55,7 +55,7 @@ case $os in
         ;;
     Alpine)
         packages=$(apk info | wc -l)
-        uptime="$(uptime -p | sed 's/up //')"
+        uptime="$(uptime | tail -c 51 | head -c 9)"
         ;;
     CRUX)
         packages=$(pkginfo -i | wc -l)

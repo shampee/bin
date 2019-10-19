@@ -1,0 +1,211 @@
+#!/bin/dash
+#
+# http://github.com/mitchweaver/bin
+#
+# the unholy lemonbar
+#
+
+# on exit, kill all children
+trap 'pkill -P $$' EXIT
+LC_ALL=""
+
+init() {
+    # grab colors from pywal
+    . ${HOME}/.cache/wal/colors.sh
+
+    [ -d /tmp/bar ] && rm -rf /tmp/bar
+    mkdir -p /tmp/bar
+
+    # wait for dwm to start
+    while ! pgrep dwm > /dev/null && [ ! -d /tmp/dwm_info ] ; do
+        sleep 0.1
+    done
+
+    # if zero, bar is disabled
+    [ $(< /tmp/dwm_info/bar_height) -eq 0 ] && exit
+
+    # force a dwm update cycle on bar launch
+    echo 1 > /tmp/dwm_info/check
+
+    num_ws=$(< /tmp/dwm_info/num_ws)
+
+    local res="$(xrandr --nograb --current | awk '/\*/ {print $1}' | tail -n 1)"
+    local res=${res% *}
+    local sw=${res%x*}
+    local sh=${res#*x}
+    local sw=${sw%.*}
+    local sh=${sh%.*}
+
+    local gap=$(< /tmp/dwm_info/gappx)
+
+    #w=$(( $sw - $gap * 2 ))
+    #w=$($sw*2)
+    #w=900
+    #x=$gap
+    x=0
+    h=$(< /tmp/dwm_info/bar_height)
+
+    # if gaps, gap the bar
+    [ $gap -gt 0 ] && h=$(( $h + ($h / 4) ))
+
+    # if bar on top, set y value to zero
+    #if [ $(< /tmp/dwm_info/top_bar) -eq 0 ] ; then
+    #    if [ $gap -gt 0 ] ; then
+    #        y=$(echo "$h / 5" | bc -l)
+    #    else
+    #        y=0
+    #    fi
+    ## otherwise, it should be screenheight minus the bar height
+    #else
+    #    if [ $gap -gt 0 ] ; then
+    #        y=$(echo "$sh - $h - ($h / 2.5)" | bc -l)
+    #    else
+    #        y=$(( $sh - $h ))
+    #    fi
+    #fi
+    y=0
+
+    ${HOME}/bin/vol > /tmp/bar/vol
+
+    # fonts
+    ft1="San Fransisco:size=11"
+	ft2="tewi:size=11"
+}
+
+layout() {
+    case $(< /tmp/dwm_info/current_layout) in
+        0) echo -n "\\uf44e" ;; # tiled
+        1) echo -n "\\ue28e" ;; # floating
+        2) echo -n "\\uf10c" ;; # monocle
+        3) echo -n "\\uf009" ;; # grid
+        4) echo -n "\\uf04c" ;; # center master
+        5) echo -n "\\uf247" ;; # center floating master
+        6) echo -n "\\uf302" ;; # fibonacci
+        7) echo -n "\\uf037" ;; # top master
+    esac 2> /dev/null
+}
+
+wksp() {
+    if [ $(< /tmp/dwm_info/check) -eq 1 ] ; then
+        for i in $(seq $num_ws || jot $num_ws) ; do
+
+            if [ $(< /tmp/dwm_info/ws"$i") -eq 1 ] ; then
+                case "$i" in
+					1) ws=" %{F$color7}\\uf120%{F-} " ;;
+					2) ws=" %{F$color7}\\uf37e%{F-} " ;;
+					3) ws=" %{F$color7}\\uf121%{F-} " ;;
+					4) ws=" %{F$color7}\\uf02d%{F-} " ;;
+					5) ws=" %{F$color7}\\uf268%{F-} " ;;
+					6) ws=" %{F$color7}\\uf084%{F-} " ;;
+					7) ws=" %{F$color7}\\uf0e0%{F-} " ;;
+					8) ws=" %{F$color7}\\uf4b6%{F-} " ;;
+					9) ws=" %{F$color7}\\uf019%{F-} " ;;
+					10) ws=" %{F$color7}\\uf611%{F-} " ;;
+				esac
+
+            else
+                case "$i" in
+					1) ws=" %{F$color2}\\uf120%{F-} " ;;
+					2) ws=" %{F$color2}\\uf37e%{F-} " ;;
+					3) ws=" %{F$color2}\\uf121%{F-} " ;;
+					4) ws=" %{F$color2}\\uf02d%{F-} " ;;
+					5) ws=" %{F$color2}\\uf268%{F-} " ;;
+					6) ws=" %{F$color2}\\uf084%{F-} " ;;
+					7) ws=" %{F$color2}\\uf0e0%{F-} " ;;
+					8) ws=" %{F$color2}\\uf4b6%{F-} " ;;
+					9) ws=" %{F$color2}\\uf019%{F-} " ;;
+					10) ws=" %{F$color2}\\uf611%{F-} " ;;
+				esac
+            fi
+
+            if [ $(< /tmp/dwm_info/current_ws) -eq $i ] ; then
+                ws="%{+u}$ws"
+            else
+                ws="%{-u}$ws"
+            fi
+
+            buffer=$buffer$ws
+
+        done
+        echo -n "$buffer" > /tmp/bar/wksp
+        echo -n 0 > /tmp/dwm_info/check
+    fi 2> /dev/null
+}
+
+vol() {
+    vol="$(< /tmp/bar/vol)"
+    case ${vol%??} in
+        10|[5-9]) echo -n "\\uf028 $vol" ;;
+        [1-4]) echo -n "\\uf027 $vol" ;;
+        *) echo -n "\\uf026 $vol"
+    esac
+}
+
+launch_daemons() {
+    # battery_daemon
+    dash -c '[ $(dash ~/bin/bperc) = NONE ] && exit ;
+    while true ; do
+        perc=$(bperc)
+        if $(case $(uname) in
+                Linux)   test $(cat /sys/class/power_supply/AC/online) -eq 1 ;;
+                OpenBSD) test $(apm -a) -eq 1
+            esac)
+        then
+            bat="\\uf492"
+        else
+            case ${perc%?} in
+                [8-9]) bat="\\uf240" ;;
+                [6-7]) bat="\\uf241" ;;
+                [4-5]) bat="\\uf242" ;;
+                [2-3]) bat="\\uf243" ;;
+                *) bat="\\uf244"
+            esac
+        fi
+        echo -n "$bat $perc%" > /tmp/bar/bat
+
+        sleep 15
+    done' > /dev/null 2>&1 &
+
+    # time_daemon
+    dash -c 'while date "+%H:%M" > /tmp/bar/date
+	do sleep 59
+    done' &
+}
+
+get_bat() {
+    if [ -f /tmp/bar/bat ] && [ "$(< /tmp/bar/bat)" != NONE ] ; then
+        echo "$(< /tmp/bar/bat)"
+    fi
+}
+
+get_wifi() {
+    if [ -n "$(interface)" ] ; then
+        echo "[ $(< /tmp/bar/wifi) ]"
+    fi
+}
+
+init
+launch_daemons
+
+while \
+    printf " %s%b%b%b%b%b%b%b%b%b%s \\n" \
+        "$(wksp)$(< /tmp/bar/wksp)%{-u} " \
+        "  %{T4}$(layout)" \
+        " %{c}%{F$color7}%{T3}$(< /tmp/bar/song)%{F-}%{r}%{T2}%{T4} " \
+        " %{F$color7}$(get_bat)  " \
+        " %{F$color7}$(vol)  " \
+        "%{F$color7} $(< /tmp/bar/date)%{T4}%{T-}%{F-}"
+    do sleep 0.5
+done 2> /dev/null | \
+
+lemonbar -db \
+	 	 -f "$ft1" \
+	 	 -f "$ft2" \
+         -g ${w}x${h}+${x}+${y} \
+         -n bar \
+         -u 2 \
+         -U $color2 \
+         -B $color0 \
+         -F $color1 \
+         -a 0 > /dev/null 2>&1
+
