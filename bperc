@@ -5,21 +5,18 @@
 # get battery percent remaining
 #
 
-# case $(uname) in
-#     Linux)
-#         for i in 0 1 2 ; do
-#             [ -d /sys/class/power_supply/BAT$i ] &&
-#                 { BAT=/sys/class/power_supply/BAT$i ; break ; }
-#         done
-#         [ -z "$BAT" ] &&
-#             { echo "NONE" ; exit 1 ; }
+case $(uname) in
+    Linux)
+        for i in 0 1 2 ; do
+            [ -d /sys/class/power_supply/BAT$i ] &&
+                { BAT=/sys/class/power_supply/BAT$i ; break ; }
+        done
+        [ -z "$BAT" ] &&
+            { echo "NONE" ; exit 1 ; }
 
-#         perc=$(cat $BAT/capacity)
-#         ;;
-#     OpenBSD) perc=$(apm -l)
-# esac
-
-# echo $perc
-perc=$(cat /sys/class/power_supply/BAT1/capacity)
+        perc=$(cat $BAT/capacity)
+        ;;
+    OpenBSD) perc=$(apm -l)
+esac
 
 echo $perc

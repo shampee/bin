@@ -1,0 +1,63 @@
+*/*::0x4d4c
+*/*::4nykey
+*/*::abendbrot
+*/*::audio-overlay
+*/*::bobwya
+*/*::brother-overlay
+*/*::calculate
+*/*::cloveros
+*/*::deadbeef-overlay
+*/*::dlang
+*/*::elementary
+*/*::erayd
+*/*::eroen
+*/*::farmboy0
+*/*::fkmclane
+*/*::flatpak-overlay
+*/*::gamerlay
+*/*::genthree
+*/*::haarp
+*/*::jacendi-overlay
+*/*::jm-overlay
+*/*::jorgicio
+*/*::lanodanOverlay
+*/*::libressl
+*/*::linxon
+*/*::lua
+*/*::luke-jr
+*/*::mv
+*/*::optmzr
+*/*::palemoon
+*/*::pentoo
+*/*::pf4public
+*/*::pg_overlay
+*/*::pixlra
+*/*::poly-c
+*/*::raiagent
+*/*::rasdark
+*/*::seden
+*/*::sk-overlay
+*/*::ssnb
+*/*::steam-overlay
+*/*::stefantalpalaru
+*/*::tlp
+*/*::torbrowser
+*/*::vampire
+*/*::vapoursynth
+*/*::vifino-overlay
+
+net-im/profanity::gentoo # optmzr
+
+net-libs/nodejs::gentoo # libressl
+dev-qt/qtnetwork::gentoo # libressl
+
+>dev-lang/tk-8.6 # doesn't build
+>dev-lang/tcl-8.6 # doesn't build
+>x11-wm/stumpwm-1.0.1_rc # doesn't build
+
+>x11-misc/xdg-utils-1.1.1-r1 # dbus dependency
+
+# version dependency
+>media-sound/supercollider-3.9.3-r1
+>sys-apps/pkgcore-0.9.7
+>dev-python/dnspython-1.15.0-r1
