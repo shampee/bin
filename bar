@@ -107,9 +107,9 @@ wksp() {
     [ $(< /tmp/dwm_info/check) -eq 1 ] || return 1
     for num in $(seq $num_ws) ; do
         if [ $(< /tmp/dwm_info/ws$num) -eq 1 ] ; then
-            ws=" %{F$color2}$num%{F-} "
+            ws=" %{F$color7}$num%{F-} "
         else
-            ws=" $num "
+            ws=" %{F$color7}$num "
         fi
 
         if [ $(< /tmp/dwm_info/current_ws) -eq $num ] ; then
@@ -140,11 +140,11 @@ get_vol() {
 #     fi
 # }
 
-#bat() {
-    #[ -f /tmp/bar/bat ] || return
-    #bat="$(< /tmp/bar/bat)"
-    #[ "$bat" != NONE ] && echo -n "$bat"
-#}
+bat() {
+    [ -f /tmp/bar/bat ] || return
+    bat="$(< /tmp/bar/bat)"
+    [ "$bat" != NONE ] && echo -n "$bat"
+}
 
 # net() {
 #     [ "$(interface)" ] && echo -n "[ $(< /tmp/bar/net) ]"
@@ -183,35 +183,35 @@ launch_daemons() {
     # done > /dev/null 2>&1 &
 
     # battery_daemon -- if NONE, must be on desktop
-    #if [ ! $(bperc) = NONE ] ; then
-    #    while perc=$(bperc) ; do
-    #        # if plugged in
-    #        case $(uname) in
-    #            Linux)
-    #                for name in AC ADP1 ; do
-    #                    [ -e /sys/class/power_supply/$name ] && break
-    #                done
-    #                test $(< /sys/class/power_supply/$name/online) -eq 1
-    #                ;;
-    #            OpenBSD) test $(apm -a) -eq 1
-    #        esac
-    #        if [ $? -eq 0 ] ; then
-    #            # then display wired power symbol
-    #            bat="\\uf492"
-    #        else
-    #            # else we are on battery, show current level
-    #            case ${perc%?} in
-    #                [8-9]) bat="\\uf240" ;;
-    #                [6-7]) bat="\\uf241" ;;
-    #                [4-5]) bat="\\uf242" ;;
-    #                [2-3]) bat="\\uf243" ;;
-    #                *) bat="\\uf244"
-    #            esac
-    #        fi
-    #        echo -n "$bat $perc%" > /tmp/bar/bat
-    #        sleep 15
-    #    done > /dev/null 2>&1 &
-    #fi
+    if [ ! $(bperc) = NONE ] ; then
+        while perc=$(bperc) ; do
+            # if plugged in
+            case $(uname) in
+                Linux)
+                    for name in AC ADP1 ; do
+                        [ -e /sys/class/power_supply/$name ] && break
+                    done
+                    test $(< /sys/class/power_supply/$name/online) -eq 1
+                    ;;
+                OpenBSD) test $(apm -a) -eq 1
+            esac
+            if [ $? -eq 0 ] ; then
+                # then display wired power symbol
+                bat="\\uf492"
+            else
+                # else we are on battery, show current level
+                case ${perc%?} in
+                    [8-9]) bat="\\uf240" ;;
+                    [6-7]) bat="\\uf241" ;;
+                    [4-5]) bat="\\uf242" ;;
+                    [2-3]) bat="\\uf243" ;;
+                    *) bat="\\uf244"
+                esac
+            fi
+            echo -n "$bat $perc%" > /tmp/bar/bat
+            sleep 15
+        done > /dev/null 2>&1 &
+    fi
 
     # time_daemon
     while date '+%H:%M' > /tmp/bar/date ; do
@@ -219,10 +219,10 @@ launch_daemons() {
     done &
 }
 
-#get_bright() {
-#    bright >/dev/null || return 1
-#    echo "[ \\u2600 $(bright) ]"
-#}
+get_bright() {
+    bright >/dev/null || return 1
+    echo "[ \\u2600 $(bright) ]"
+}
 
 # ------------------ Main -----------------------
 init
@@ -233,6 +233,7 @@ while \
         "$(wksp)$(< /tmp/bar/wksp)%{-u} " \
         "  %{T4}$(layout)" \
         " %{c}%{F$color7}%{T3}$(< /tmp/bar/song)%{F-}%{r}%{T2}%{T4} " \
+        " %{F$color7}$(bat)    " \
         " %{F$color7}$(get_vol)    " \
         "%{F$color7} $(< /tmp/bar/date)%{T4}%{T-}%{F-} "
     do sleep 0.5

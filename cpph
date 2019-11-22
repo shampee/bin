@@ -1,4 +1,4 @@
-#!/bin/ksh
+#!/bin/mksh
 #TODO: c/cpp file detection
 
 nvim "$1".{cpp,h}
