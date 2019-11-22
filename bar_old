@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/bin/mksh
 #
 # http://github.com/mitchweaver/bin
 #
@@ -68,8 +68,9 @@ init() {
     ${HOME}/bin/vol > /tmp/bar/vol
 
     # fonts
-    ft1="San Fransisco:size=11"
-	ft2="tewi:size=11"
+    ft1="San Francisco Text:size=12"
+	ft2="Font Awesome 5 Pro:size=10"
+	ft3="Font Awesome 5 Brands:size=10"
 }
 
 layout() {
@@ -142,47 +143,12 @@ vol() {
 }
 
 launch_daemons() {
-    # battery_daemon
-    dash -c '[ $(dash ~/bin/bperc) = NONE ] && exit ;
-    while true ; do
-        perc=$(bperc)
-        if $(case $(uname) in
-                Linux)   test $(cat /sys/class/power_supply/AC/online) -eq 1 ;;
-                OpenBSD) test $(apm -a) -eq 1
-            esac)
-        then
-            bat="\\uf492"
-        else
-            case ${perc%?} in
-                [8-9]) bat="\\uf240" ;;
-                [6-7]) bat="\\uf241" ;;
-                [4-5]) bat="\\uf242" ;;
-                [2-3]) bat="\\uf243" ;;
-                *) bat="\\uf244"
-            esac
-        fi
-        echo -n "$bat $perc%" > /tmp/bar/bat
-
-        sleep 15
-    done' > /dev/null 2>&1 &
-
     # time_daemon
     dash -c 'while date "+%H:%M" > /tmp/bar/date
 	do sleep 59
     done' &
 }
 
-get_bat() {
-    if [ -f /tmp/bar/bat ] && [ "$(< /tmp/bar/bat)" != NONE ] ; then
-        echo "$(< /tmp/bar/bat)"
-    fi
-}
-
-get_wifi() {
-    if [ -n "$(interface)" ] ; then
-        echo "[ $(< /tmp/bar/wifi) ]"
-    fi
-}
 
 init
 launch_daemons
@@ -192,20 +158,21 @@ while \
         "$(wksp)$(< /tmp/bar/wksp)%{-u} " \
         "  %{T4}$(layout)" \
         " %{c}%{F$color7}%{T3}$(< /tmp/bar/song)%{F-}%{r}%{T2}%{T4} " \
-        " %{F$color7}$(get_bat)  " \
         " %{F$color7}$(vol)  " \
         "%{F$color7} $(< /tmp/bar/date)%{T4}%{T-}%{F-}"
     do sleep 0.5
 done 2> /dev/null | \
-
 lemonbar -db \
-	 	 -f "$ft1" \
-	 	 -f "$ft2" \
+		 -o -1 \
+         -f "$ft1" \
+		 -o -3 \
+         -f "$ft2" \
+		 -o -3 \
+         -f "$ft3" \
          -g ${w}x${h}+${x}+${y} \
          -n bar \
          -u 2 \
          -U $color2 \
          -B $color0 \
          -F $color1 \
-         -a 0 > /dev/null 2>&1
-
+         -a 0 > /tmp/bar/log 2> /tmp/bar/err_log

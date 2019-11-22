@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/bin/mksh
 #
 # http://github.com/mitchweaver/bin
 #

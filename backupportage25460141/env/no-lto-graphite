@@ -1,2 +1,0 @@
-CFLAGS="-Ofast -march=native -falign-functions=32 -mfpmath=both -pipe -funroll-loops -malign-data=cacheline -mtls-dialect=gnu2 -Wl,--hash-style=gnu"
-CXXFLAGS="${CFLAGS}"
