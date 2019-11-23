@@ -9,26 +9,26 @@ usage() { >&2 echo "Usage: -inc, -dec" ; exit 1 ; }
 
 unmute() {
     case $(uname) in
-        Linux) amixer sset PCM unmute ;;
+        Linux) amixer sset Master unmute ;;
         OpenBSD) mixerctl -q outputs.master.mute=off
     esac
 }
 
 mute() {
     case $(uname) in
-        Linux) amixer sset PCM toggle ;;
+        Linux) amixer sset Master toggle ;;
         OpenBSD) mixerctl -q outputs.master.mute=toggle
     esac
 }
 
 inc() {
-    unmute 
+    unmute
     case $(uname) in
         Linux)
             if type pulseaudio > /dev/null 2>&1 ; then
                 pactl set-sink-volume 0 +"$1"%
             else
-                amixer sset PCM "$1"+
+                amixer sset Master "$1"+
             fi
             ;;
         OpenBSD) mixerctl -q outputs.master="+$1"
@@ -36,13 +36,13 @@ inc() {
 }
 
 dec() {
-    unmute 
+    unmute
     case $(uname) in
         Linux)
             if type pulseaudio > /dev/null 2>&1 ; then
                 pactl set-sink-volume 0 -"$1"%
             else
-                amixer sset PCM "$1"-
+                amixer sset Master "$1"-
             fi
             ;;
         OpenBSD) mixerctl -q outputs.master="-$1"
@@ -52,7 +52,7 @@ dec() {
 ismute() {
     case $(uname) in
         Linux)
-            if $(amixer -q sget PCM | grep -o '\[off\]' > /dev/null) ; then
+            if $(amixer -q sget Master | grep -o '\[off\]' > /dev/null) ; then
                 echo "muted"
                 return 0
             else
@@ -76,12 +76,12 @@ get_vol() {
         exit
     fi
     case $(uname) in
-        Linux) 
+        Linux)
             if type pulseaudio > /dev/null 2>&1 ; then
 				vol=`pactl list sinks | grep '^[[:space:]]Volume:' | \
 					head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,'`
 			else
-				vol="$(amixer sget PCM | \
+				vol="$(amixer sget Master | \
 					grep -oE '\[*..?.?%\]' | \
 					sed -e 's/\[//' -e 's/\%\]//')"
             fi
