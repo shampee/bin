@@ -1,3 +1,4 @@
 #!/bin/sh
+# vim: filetype=sh
 
 xrandr -s 1280x720

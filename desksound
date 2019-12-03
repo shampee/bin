@@ -1,2 +1,3 @@
 #!/bin/bash
+# vim: filetype=sh
 ffmpeg -f x11grab -video_size 1600x900 -framerate 30 -i :0.0 -f pulse -i default -preset ultrafast -crf 18 -pix_fmt yuv420p ~/desktop.mp4

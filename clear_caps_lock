@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# vim: filetype=sh
 from ctypes import *
 X11 = cdll.LoadLibrary("libX11.so.6")
 display = X11.XOpenDisplay(None)

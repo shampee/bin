@@ -1,4 +1,5 @@
 #!/bin/dash
+# vim: filetype=sh
 #
 # make a 4chan compatible webm
 

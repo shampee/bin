@@ -1,4 +1,5 @@
 go() {
+# vim: filetype=sh
     for ext ; do
         find . -name "*.$ext" -exec bash -c \
             'ffmpeg -i "{}" -y -c:v \

@@ -1,4 +1,5 @@
 #!/bin/sh
+# vim: filetype=sh
 #
 # ufetch-raspbian - tiny system info for raspbian
 
@@ -8,7 +9,7 @@
 host="$(hostname)"
 os='Raspbian'
 kernel="$(uname -sr)"
-uptime="$(/usr/bin/uptime -p| sed 's/up //')"
+uptime="$(/usr/bin/uptime -p | sed 's/up //')"
 packages="$(dpkg -l | wc -l)"
 shell="$(basename "$SHELL")"
 
@@ -56,11 +57,11 @@ if [ -x "$(command -v tput)" ]; then
 fi
 
 # you can change these
-lc="${reset}${bold}${red}"          # labels
-nc="${reset}${bold}${red}"          # user and hostname
-ic="${reset}"                       # info
-c0="${reset}${green}"               # first color
-c1="${reset}${red}"                 # second color
+lc="${reset}${bold}${red}" # labels
+nc="${reset}${bold}${red}" # user and hostname
+ic="${reset}"              # info
+c0="${reset}${green}"      # first color
+c1="${reset}${red}"        # second color
 
 ## OUTPUT
 

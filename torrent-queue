@@ -1,4 +1,5 @@
 #!/bin/dash
+# vim: filetype=sh
 #
 # http://github.com/mitchweaver/bin
 #

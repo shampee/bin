@@ -1,4 +1,5 @@
 #!/bin/dash
+# vim: filetype=sh
 
 [ $# -eq 0 ] && read inp && set $inp
 

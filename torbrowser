@@ -1,3 +1,4 @@
 #!/bin/dash
+# vim: filetype=sh
 cd ~/var/tor-browser_en-US
 ./start-tor-browser.desktop

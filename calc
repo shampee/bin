@@ -1,7 +1,8 @@
 #!/bin/mksh
+# vim: filetype=sh
 mkfifo /tmp/fifo
 dialog --title 'Calculator' --inputbox "" 12 24 2>/tmp/fifo &
-input=`cat /tmp/fifo`
-output=`echo $input | wcalc`
+input=$(cat /tmp/fifo)
+output=$(echo "$input" | wcalc)
 dialog --title 'Calculator' --infobox "$output" 12 24
 rm /tmp/fifo
