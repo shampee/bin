@@ -9,9 +9,9 @@
 dir=/tmp/pape
 mkdir -p $dir
 
-file="$dir/$(date)-unsplash-1920x1080.png"
+file="$dir/$(date)-unsplash-1600x900.png"
 
-wget https://source.unsplash.com/random/1920x1080 -O "$file" -- > /dev/null 2>&1
+wget https://source.unsplash.com/random/1600x900 -O "$file" -- > /dev/null 2>&1
 
 feh --bg-fill "$file" &
 
@@ -21,7 +21,7 @@ dash ${HOME}/bin/rice "$file" || exit 1
 [ "$(pgrep bar)" ] &&
     { pkill -9 bar ; nohup bar -- > /dev/null 2>&1 & } &
 
-[ "$(pgrep -x compton)" ] && 
+[ "$(pgrep -x compton)" ] &&
     { pkill -9 compton ; nohup compton -- > /dev/null 2>&1 & } &
 
 #xrdb load ${HOME}/etc/Xresources
