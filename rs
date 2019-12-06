@@ -1,7 +1,9 @@
 #!/bin/ksh
-if [ -z "$1" ]; then
-	redshift -x > /dev/null
+if [[ $# -eq 0 ]]; then
+	redshift -x &> /dev/null
 else
-	redshift -x > /dev/null
-	redshift -O "$1" &> /dev/null
+	redshift -x &> /dev/null
+
+	sci=$(echo "$1" | upper | numfmt --from=si)
+	redshift -O "$sci" &> /dev/null
 fi
