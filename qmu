@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/bin/sh
 # vim: filetype=sh
 #
 # http:/github.com/mitchweaver/bin
@@ -15,11 +15,11 @@ while [ $# -gt 0 ] ; do
         *-disk|-d)  disk="$2" ;;
         *-ram|-r)   ram="$2" ;;
         *-cdrom|-c) cdrom="-cdrom $2" ;;
-        *-create) 
+        *-create)
             echo "Enter file name:"
-            read filename
+            read -r filename
             echo "Enter size, in gigabytes;"
-            read size
+            read -r size
             qemu-img create -f qcow2 "$filename" "$size"
             exit
             ;;
@@ -33,10 +33,10 @@ ram=${ram:-512M}
 
 qemu-system-x86_64 \
     -daemonize \
-    -m $ram \
+    -m "$ram" \
     -vga std \
     -usb \
     -device usb-tablet \
     -enable-kvm \
-    $cdrom \
+    "$cdrom" \
     "$disk" &

@@ -1,5 +1,4 @@
-#!/bin/ksh
-# vim: filetype=sh
+#!/bin/sh
 mkfifo /tmp/fifo
 dialog --title 'Calculator' --inputbox "" 12 24 2>/tmp/fifo &
 input=$(cat /tmp/fifo)

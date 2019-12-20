@@ -1,5 +1,4 @@
-#!/bin/mksh
-# vim: filetype=sh
+#!/bin/ksh
 #
 # http://github.com/mitchweaver
 #
@@ -12,8 +11,8 @@ used=$(free --mega | grep Mem | awk '{print $3}' | grep -oE '([0-9]*)')
 total=$(free --mega | grep Mem | awk '{print $2}' | grep -oE '([0-9]*)')
 
 format_mem() {
-	[ $1 -lt 1000 ] && set -- '0'$1
-	echo ${1%???}\.${1:1:1}
+	[ "$1" -lt 1000 ] && set -- '0'"$1"
+	echo "${1%???}"\."${1:1:1}"
 }
 
-echo "$(format_mem $used)/$(format_mem $total)"GB
+echo "$(format_mem "$used")/$(format_mem "$total")"GB

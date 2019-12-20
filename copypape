@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/bin/sh
 # vim: filetype=sh
 #
 # still a work in progress
@@ -15,6 +15,5 @@ rice "~/papes/$file"
 [ "$(pgrep bar)" ] &&
     { pkill -9 bar ; nohup bar -- > /dev/null 2>&1 & } &
 
-[ "$(pgrep -x compton)" ] && 
+[ "$(pgrep -x compton)" ] &&
     { pkill -9 compton ; nohup compton -- > /dev/null 2>&1 & } &
-

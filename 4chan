@@ -1,6 +1,5 @@
-#!/bin/dash
-# vim: filetype=sh
-#
+#!/bin/sh
+
 # make a 4chan compatible webm
 
 ffmpeg -i "$1" -y -c:v \

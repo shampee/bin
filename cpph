@@ -1,4 +1,3 @@
 #!/bin/ksh
-# vim: filetype=sh
 
 nvim "$1".{cpp,h}
