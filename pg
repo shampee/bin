@@ -1,2 +1,2 @@
 #!/bin/sh
-pgrep "$*"
+[ $# -gt 0 ] && pgrep "$*"

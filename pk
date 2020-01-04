@@ -1,2 +1,2 @@
 #!/bin/sh
-pkill -9 "$*"
+[ $# -gt 0 ] && pkill -9 "$*"
