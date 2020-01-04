@@ -1,5 +1,4 @@
-#!/bin/dash
-# vim: filetype=sh
+#!/bin/sh
 #
 # http://github.com/mitchweaver/bin
 #
@@ -12,9 +11,9 @@
 if [ $# -gt 0 ] ; then
     xbacklight -inc "$1"
 
-    if [ $(printf %0.f $(xbacklight -get)) -lt 0 ] ; then
+    if [ "$(printf %0.f "$(xbacklight -get)")" -lt 0 ] ; then
         xbacklight -set 1
     fi
 fi
 
-printf %0.f%%\\n $(xbacklight -get)
+printf %0.f%%\\n "$(xbacklight -get)"

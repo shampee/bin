@@ -1,6 +1,4 @@
-#!/bin/mksh
-# vim: filetype=sh
-# shellcheck shell=bash
+#!/bin/ksh
 #
 # http://github.com/mitchweaver/bin
 #
@@ -242,11 +240,11 @@ do
 	sleep 0.5
 done 2>/dev/null |
 	lemonbar -db \
-		-o -1 \
+		-o 0 \
 		-f "$ft1" \
-		-o -3 \
+		-o -2 \
 		-f "$ft2" \
-		-o -3 \
+		-o -2 \
 		-f "$ft3" \
 		-g ${w}x${h}+${x}+${y} \
 		-n bar \

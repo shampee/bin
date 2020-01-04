@@ -10,12 +10,12 @@
 
 while sleep 60 ; do
 
-	if [ `cat /sys/class/power_supply/AC/online` -eq 0 ]; then
+	if [ "$(cat /sys/class/power_supply/AC/online)" -eq 0 ]; then
 		perc=$(bperc)
 
-		if [ $perc -eq 5 ] ; then
+		if [ "$perc" -eq 5 ] ; then
 			notify-send 'Battery critical!'
-		elif [ $perc -eq 10 ] ; then
+		elif [ "$perc" -eq 10 ] ; then
 			notify-send -u critical 'Battery low!'
 		fi
 	fi

@@ -1,5 +1,4 @@
-#!/bin/mksh
-# vim: filetype=sh
+#!/bin/ksh
 #
 # http://github.com/mitchweaver/bin
 #

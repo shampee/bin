@@ -1,9 +1,8 @@
-#!/bin/dash
-# vim: filetype=sh
+#!/bin/sh
 #
 # http://github.com/mitchweaver/bin
 #
-# Toggles between 'us' and 'us-international' 
+# Toggles between 'us' and 'us-international'
 # keyboard layouts.
 #
 
@@ -11,7 +10,7 @@
 [ "$(setxkbmap -query | grep -c intl)" -eq 1 ] ||
     { var='-variant intl' ; out=' International' ; }
 
-setxkbmap -layout us $var
+setxkbmap -layout us "$var"
 notify-send -t 1000 -u low "Keyboard Layout: US${out}"
 
-xmodmap ${HOME}/etc/Xmodmap
+xmodmap "${HOME}/etc/Xmodmap"

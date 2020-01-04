@@ -1,5 +1,4 @@
-#!/bin/dash
-# vim: filetype=sh
+#!/bin/sh
 #
 # http://github.com/mitchweaver/bin
 #
@@ -14,7 +13,7 @@ usage() { >&2 echo "Usage: crypt {-c,-d} <path>"
 case "$1" in
     --encrypt|-c)
         if [ -d "$2" ] ; then
-            dash ${HOME}/bin/pack "$2"
+            sh "${HOME}/bin/pack" "$2"
             set 2 "${2%/}".tar.xz
         elif [ -f "$2" ] ; then
             xz -9 "$2"

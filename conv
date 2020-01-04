@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/bin/sh
 # vim: filetype=sh
 #
 # http://github.com/mitchweaver/bin
@@ -6,8 +6,8 @@
 # convert between different number formats
 #
 
-usage() { 
-    >&2 echo "Usage: conv -i {d,b,h,o} -o {d,b,h,o} <value>" 
+usage() {
+    >&2 echo "Usage: conv -i {d,b,h,o} -o {d,b,h,o} <value>"
     exit 1
 }
 

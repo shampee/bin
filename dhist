@@ -1,5 +1,4 @@
-#!/bin/dash
-# vim: filetype=sh
+#!/bin/sh
 #
 # http://github.com/mitchweaver/bin
 #
@@ -7,8 +6,8 @@
 # with dmenu and run the chosen command.
 #
 
-history_file="${HOME}/tmp/.$(basename ${SHELL})_history"
+history_file="${HOME}/tmp/.$(basename "${SHELL}")_history"
 
-cat "${history_file}" | awk '!seen[$0]++' |
+"${history_file}" | awk '!seen[$0]++' |
 	sed '1!G;h;$!d' | menu -p 'History:' "$@" |
 	${SHELL}

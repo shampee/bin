@@ -1,0 +1,3 @@
+#!/bin/sh
+
+"$HOME/.scriptcs/scriptcs.exe"
