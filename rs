@@ -1,11 +1,6 @@
-#!/bin/ksh
-if [[ $# -gt 0 ]]; then
-	redshift -x &> /dev/null
-	redshift -O "$(echo "$1" | upper | numfmt --from=si)" &> /dev/null
-	if [[ "$1" == +([0-9]) && "$1" -lt "1000" && "$1" ]]; then
-		"$HOME"/bin/rs "$1"k
-	fi
+#!/bin/sh
+if [ $# -gt 0 ]; then
+	redshift -x 1>/dev/null; redshift -O "$(echo "$1""K" | numfmt --from=si)" 1>/dev/null
 else
-	redshift -x &> /dev/null
+	redshift -x 1>/dev/null
 fi
-	# "$var" == +([0-9]) && "$var" -lt 1000 || "$HOME"/bin/rs "$var"K
