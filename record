@@ -1,5 +1,4 @@
-#!/bin/dash
-# vim: filetype=sh
+#!/bin/sh
 #
 # http://github.com/mitchweaver/bin
 #
@@ -50,7 +49,7 @@ case "$1" in
 
         pid=$(cat $pidfile)
         case $(command ps -o state= $pid) in
-            S) 
+            S)
                 kill -s STOP $pid
                 echo "Pausing..."
                 ;;
