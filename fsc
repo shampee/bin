@@ -1,0 +1,18 @@
+#!/bin/sh
+#---------------#
+# find sys calls#
+#---------------#
+#-32 and 64 bit-#
+#---------------#
+
+if [ $# -lt 1 ]; then
+	printf "Usage: %s\n" "bsc 32 read"
+else
+	if [ "$1" = "64" ]; then
+		# Find syscalls for 64bit asm
+		grep "__NR_""$2" /usr/include/asm/unistd_64.h
+	else
+		# Find syscalls for 32bit asm
+		grep "__NR_""$2" /usr/include/asm/unistd_32.h
+	fi
+fi
