@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [[ -f /tmp/bar ]]; then
+if [ -f /tmp/bar ]; then
 	xdo hide -N Polybar
 	rm /tmp/bar
 else
