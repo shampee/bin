@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [[ -f /tmp/bar ]]; then
+	xdo hide -N Polybar
+	rm /tmp/bar
+else
+	xdo show -N Polybar
+	touch /tmp/bar
+fi
