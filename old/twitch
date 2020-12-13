@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/usr/bin/dash
 # vim: filetype=sh
 #
 # http://github.com/mitchweaver/bin
@@ -10,13 +10,38 @@
 streams=\
 "
 ESL_CSGO
-shroud
-gAmErCaRL160
-vihart
-Sweet_Anita
-DreamHackCS
-DrDisrespect
+Asmongold
+forsen
+jacksepticeye
+Jinnytty
+Lana_Lux
+ESL_CSGOb
 BruceGreene
+rhymu8354
+Sweet_Anita
+SirLarr
+Tsoding
+sashagrey
+shroud
+Trainwreckstv
+ThePrimeagen
+Livibee
+Mizkif
+Playstation
+HealthyGamer_GG
+charalanahzard
+xQcOW
+vihart
+strobeys
+gAmErCaRL160
+powelawls
+zerOc__
+Naysayer88
+Pewdiepie
+Olmus
+lastmiles
+KidQueb
+strawberryhacker
 "
 # ------------------------------------- #
 

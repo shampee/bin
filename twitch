@@ -1,0 +1,24 @@
+#!/bin/sh
+
+: "${TWITCH_STREAM_FILE:=${HOME}/.bin/twitch.txt}"
+: "${MENU_PROG:=dmenu}"
+: "${MPV_OPTS:=--really-quiet}"
+
+log=~/.cache/twitch
+:>"$log"
+trap 'rm "$log"' EXIT INT TERM
+
+while read -r stream ; do
+    stream=https://twitch.tv/$stream
+    youtube-dl -q -s "$stream" &&
+        printf '%s\n' "$stream" >>"$log" &
+done < "$TWITCH_STREAM_FILE"
+wait
+
+if [ -s "$log" ] ; then
+    sel=$($MENU_PROG -p 'Stream:' < "$log")
+    [ "$sel" ] &&
+    exec mpv $MPV_OPTS "$sel"
+else
+    notify-send "No streams online"
+fi

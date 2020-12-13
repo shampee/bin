@@ -1,0 +1,2 @@
+#!/bin/sh
+man -k . | fzf | xargs man    # FIXME: öppnar alla
