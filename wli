@@ -1,0 +1,8 @@
+#!/bin/sh
+if [ $# -gt 1 ]; then
+    wal --backend "$1" -o "cssff" -n -l -i "$2"
+else
+    wal -o "cssff" -n -l -i "$1"
+fi
+hsetroot -solid "$(head -n 5 "$HOME"/.cache/wal/colors | tail -n 1 )"
+echo 0 > ~/.cache/wal/bg

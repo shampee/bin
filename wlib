@@ -1,0 +1,7 @@
+#!/bin/sh
+if [ $# -gt 1 ]; then
+    wal --backend "$1" -o "cssff" -l -i "$2"
+else
+    wal -o "cssff" -n -l -i "$1"
+fi
+echo 1 > ~/.cache/wal/bg
