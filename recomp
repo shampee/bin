@@ -1,0 +1,25 @@
+#!/bin/dash
+# vim: filetype=sh
+#
+# http://github.com/mitchweaver/bin
+#
+# script to recompile often used programs.
+#
+
+usage() { echo "Usage: recomp {path1,path2,...}" ; exit 1 ; }
+
+[ $# -eq 0 ] && usage
+
+case $(uname) in
+    Linux) jobs=$(( $(nproc) + 1 )) ;;
+    OpenBSD) jobs=$(( $(sysctl -n hw.ncpu) + 1 ))
+esac
+
+for path ; do
+
+    cd "$path" || usage
+    make clean &&
+    make -j$jobs &&
+    make install || exit 1
+
+done > /dev/null

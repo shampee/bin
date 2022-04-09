@@ -1,0 +1,6 @@
+#!/bin/sh
+prev_dir="$PWD"
+cd "$HOME/bin" || exit
+scss --trace "$HOME/bin/userChrome.scss" > "$HOME/.mozilla/firefox/m0ecu6i9.default-release/chrome/userChrome.css"
+rm userChrome.{css,css.map} 2>/dev/null
+cd "$prev_dir" || exit

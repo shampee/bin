@@ -1,5 +1,33 @@
-#!/bin/sh
+#!/bin/ksh
 # edit .config files shorthand
 
-if [[ "$#" ]]
-nvim
+if [ "$EDITOR" ]; then
+    if [ -f "$HOME/.$1rc" ]; then
+        $EDITOR "$HOME/.$1rc"
+    elif [ -f "$HOME/.$1config" ]; then
+        $EDITOR "$HOME/.$1config"
+    elif [ -f "$HOME/.$1.conf" ]; then
+        $EDITOR "$HOME/.$1.conf"
+    elif [ -f "$HOME/.$1" ]; then
+        $EDITOR "$HOME/.$1"
+    else
+        dir="$HOME/.config"
+        if [ -d "$dir/$1" ]; then
+            if [ -f "$dir/$1/config" ]; then
+                $EDITOR "$dir/$1/config"
+            elif [ -f "$dir/$1/$1rc" ]; then
+                $EDITOR "$dir/$1/$1rc"
+            elif [ -f "$dir/$1/$1.conf" ]; then
+                $EDITOR "$dir/$1/$1.conf"
+            elif [ -f "$dir/$1/$1.cfg" ]; then
+                $EDITOR "$dir/$1/$1.cfg"
+            elif [ -f "$dir/$1/$1_config.*" ]; then
+                $EDITOR "$dir/$1/$1_config.*"
+            elif [ -f "$dir/$1/config.*" ]; then
+                $EDITOR "$dir/$1/config.*"
+            else
+                echo "Huh?"
+            fi
+        fi
+    fi
+fi

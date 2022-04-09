@@ -1,0 +1,4 @@
+#!/bin/sh
+
+translated="$(t8 "$(xclip -o -selection primary)")"
+notify-send "Translated" "$translated"

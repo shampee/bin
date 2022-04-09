@@ -1,15 +1,10 @@
-import net
+import net, parseopt
 from os import sleep
-
 
 type ConnectionDetails* = ref object
   channel : string
   nick    : string
   pass    : string
-
-
-proc setChannel(con: var ConnectionDetails, chan: string) =
-  con.channel = "JOIN #" & chan & "\r\n"
 
 proc parseMessage(buf: string): string =
   var
@@ -39,12 +34,15 @@ proc login(sock: Socket, con: ConnectionDetails) =
   sock.send(con.nick)
   sock.send(con.channel)
 
+proc setChannel(sock: Socket; con: var ConnectionDetails, chan: string) =
+  con.channel = "JOIN #" & chan & "\r\n"
+  login(sock, con)
 
 proc pingpong(sock: Socket, buf: var string) =
   buf = sock.recvLine()
   if buf == "PONG :tmi.twitch.tv":
     sock.send("PONG :tmi.twitch.tv")
-    echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ", buf
+    echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> PONG'd"
 
 
 when isMainModule:

@@ -1,0 +1,67 @@
+#!/bin/dash
+# vim: filetype=sh
+#
+# http://github.com/mitchweaver/bin
+#
+# Screen Capture
+#
+
+pgrep slop > /dev/null && exit 1
+
+usage() {
+    printf "%s\n%s\n%s\n%s\n%s\n%s\n%s\n\n" \
+        "Usage:" \
+        "--------------------" \
+        "--upload,-u     -   upload file to 0x0.st" \
+        "--output,-o     -   custom output path" \
+        "--no-crop,-n    -   just import, don't crop" \
+        "--quality,-q    -   custom quality, 0-100" \
+        "--feh,-f        -   open capture with feh"
+    exit 0
+}
+
+quality=100
+while [ $# -gt 0 ] ; do
+    case "$1" in
+        --output|-o) shift ; file="$1" ;;
+        --no-crop|-n) nocrop=true ;;
+        --upload|-u)  upload=true ;;
+        --quality|-q) quality=$1 ;;
+        --feh|-f) feh=true ;;
+        --help|-h) usage ;;
+        *) file="$1"
+    esac
+    shift
+done
+
+if [ -z "$file" ] ; then
+    dir=${HOME}/tmp/scrap
+    mkdir -p $dir
+    file="$dir/scrap-$(ls $dir | wc -l).png"
+fi
+
+imp="import -quiet -silent -window root -quality $quality"
+
+if [ "$nocrop" ] ; then
+    sleep 0.25
+    $imp "$file"
+else
+    set $(slop -q -o -f '%x %y %w %h')
+    [ -z "$4" ] && exit 1
+    $imp -crop ${3}x${4}+${1}+${2} "$file"
+fi
+ 
+ln -sf "$file" /tmp/scrap.png
+
+if [ "$upload" ] ; then
+    # url=$(dash ~/bin/ix "$file")
+    url=`curl -sF file=@"$file" http://0x0.st`
+    echo $url
+    for i in is ib ip ; do
+        echo $url | xsel -$i
+    done
+fi
+
+if [ "$feh" ] ; then
+    feh /tmp/scrap.png
+fi

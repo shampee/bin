@@ -1,0 +1,3 @@
+#!/bin/sh
+
+/bin/kitty --name=nvedit -T=nvedit nvim "$@"

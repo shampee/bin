@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ $# -lt 1 ]; then
+    kitty
+else
+    tabbed -c -d alacritty --embed
+fi

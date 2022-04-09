@@ -1,7 +1,24 @@
 #!/bin/sh
 if [ $# -gt 1 ]; then
-    wal --backend "$1" -o "cssff" -l -i "$2"
+    case $1 in
+        "1")
+            wal --backend colorthief -o "cssff" -l -i "$2"
+            ;;
+        "2")
+            wal --backend haishoku -o "cssff" -l -i "$2"
+            ;;
+        "3")
+            wal --backend colorz -o "cssff" -l -i "$2"
+            ;;
+        "4")
+            wal --backend wal -o "cssff" -l -i "$2"
+            ;;
+        *)
+            wal -o "cssff" -l -i "$1"
+            ;;
+
+    esac
 else
-    wal -o "cssff" -n -l -i "$1"
+    wal -o "cssff" -n -i "$1"
 fi
 echo 1 > ~/.cache/wal/bg
